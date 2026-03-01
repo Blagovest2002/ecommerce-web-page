@@ -2,23 +2,23 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Phone, X, Package, Percent, Zap } from "lucide-react";
 
-import product1 from "@/assets/images/product-1.png";
-import product2 from "@/assets/images/product-2.png";
-import product3 from "@/assets/images/product-3.png";
-import product4 from "@/assets/images/product-4.png";
+import product1 from "@assets/IMG_7461_1772361053130.jpeg";
+import product2 from "@assets/IMG_7462_1772361053131.jpeg";
+import product3 from "@assets/IMG_7463_1772361053130.jpeg";
+import product4 from "@assets/IMG_7460_1772361053129.jpeg";
 
 const products = [
-  { id: 1, name: "Флакон 640g", price: "50 лв.", image: product1 },
-  { id: 2, name: "Балони (50 бр.)", price: "10 лв.", image: product2 },
-  { id: 3, name: "Флакон 1100g", price: "80 лв.", image: product3 },
-  { id: 4, name: "Party Pack", price: "55 лв.", image: product4 },
+  { id: 1, name: "Exotic Whip 670g", price: "75,00 €", image: product1 },
+  { id: 2, name: "Exotic Whip 2000g", price: "30,00 €", image: product2 },
+  { id: 3, name: "Instant Whip 640g", price: "25,00 €", image: product3 },
+  { id: 4, name: "Carbon Whip Magnum 1100 g", price: "45,00 €", image: product4 },
 ];
 
 const promos = [
-  { id: 1, name: "3x 640g Флакона", offer: "Само за 140 лв.", image: product1 },
-  { id: 2, name: "2x 1100g Флакона", offer: "Само за 150 лв.", image: product3 },
-  { id: 3, name: "5x 640g Флакона", offer: "Само за 220 лв.", image: product1 },
-  { id: 4, name: "Mega Party Pack", offer: "5x 1100g + 100 балона за 380 лв.", image: product4 },
+  { id: 1, name: "Exotic Whip 670g", offer: "6 броя • 180,00 €", image: product1 },
+  { id: 2, name: "Exotic Whip 2000g", offer: "3 броя • 200,00 €", image: product2 },
+  { id: 3, name: "Instant Whip 640g", offer: "6 броя • 110,00 €", image: product3 },
+  { id: 4, name: "Carbon Whip Magnum 1100g", offer: "4 броя • 155,00 €", image: product4 },
 ];
 
 export default function Home() {
