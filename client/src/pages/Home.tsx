@@ -54,12 +54,12 @@ export default function Home() {
             </button>
             
             <a 
-              href="tel:0888888888" 
+              href="tel:0886401804" 
               className="group relative inline-flex items-center justify-center gap-2 px-5 py-2.5 md:px-8 md:py-4 font-bold text-white bg-primary rounded-full overflow-hidden transition-transform hover:scale-105 active:scale-95 shadow-[0_0_20px_rgba(217,70,239,0.4)] text-sm md:text-lg ml-2"
               data-testid="button-order"
             >
               <div className="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:animate-[shimmer_1.5s_infinite]" />
-              <Phone className="w-5 h-5" /> 088 888 8888
+              <Phone className="w-5 h-5" /> 088 640 1804
             </a>
           </nav>
         </div>
@@ -180,10 +180,10 @@ export default function Home() {
               
               <div className="mt-16 text-center">
                  <a 
-                  href="tel:0888888888" 
+                  href="tel:0886401804" 
                   className="inline-flex items-center justify-center gap-3 px-8 py-4 font-bold text-white bg-primary rounded-full hover:scale-105 active:scale-95 transition-transform shadow-[0_0_30px_rgba(217,70,239,0.5)] text-lg"
                 >
-                  <Phone className="w-6 h-6" /> Поръчай сега: 088 888 8888
+                  <Phone className="w-6 h-6" /> Поръчай сега: 088 640 1804
                 </a>
               </div>
             </motion.div>
