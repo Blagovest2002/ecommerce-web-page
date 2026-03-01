@@ -2,26 +2,45 @@
 <html lang="bg">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5" />
+    <meta name="theme-color" content="#0a0a0a" />
+    <meta name="color-scheme" content="dark" />
 
-    <title>Райски Газ София 24/7</title>
-    <meta property="og:title" content="Райски Газ София 24/7" />
-    <meta property="og:description" content="БЕЗПЛАТНА експресна доставка до 20 минути в София" />
-    <meta property="og:type" content="website" />
-    <meta property="og:image" content="https://replit.com/public/images/opengraph.png" />
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:site" content="@replit" />
-    <meta name="twitter:title" content="Райски Газ София 24/7" />
-    <meta name="twitter:description" content="БЕЗПЛАТНА експресна доставка до 20 минути в София" />
-    <meta name="twitter:image" content="https://replit.com/public/images/opengraph.png" />
+    <!-- Default SEO (overridden per-route by react-helmet-async) -->
+    <title>Райски Газ София 24/7 — Денонощна доставка на флакони и балони</title>
+    <meta name="description" content="Поръчайте райски газ с безплатна експресна доставка до 20 минути в София. Флакони Exotic Whip, Instant Whip и Carbon Whip на най-ниски цени. Обадете се 24/7: 088 640 1804." />
 
+    <!-- Favicon -->
     <link rel="icon" type="image/png" href="/favicon.png" />
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Preconnect & DNS-prefetch for external fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
+    <link rel="dns-prefetch" href="https://fonts.gstatic.com" />
+    <!-- Load fonts with swap to avoid FOIT -->
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
   </head>
   <body>
     <div id="root"></div>
+
+    <!-- Noscript fallback for crawlers and users without JS -->
+    <noscript>
+      <div style="max-width:700px;margin:60px auto;padding:24px;font-family:sans-serif;color:#eee;background:#111;border-radius:12px">
+        <h1>Райски Газ София 24/7</h1>
+        <p>Денонощна доставка на райски газ в София — флакони и балони Exotic Whip, Instant Whip, Carbon Whip Magnum. Безплатна експресна доставка до 20 минути.</p>
+        <p><strong>Телефон за поръчка:</strong> <a href="tel:+359886401804" style="color:#d4a54a">088 640 1804</a></p>
+        <p><strong>Район:</strong> София, България</p>
+        <p><strong>Работно време:</strong> 24/7 без почивен ден</p>
+        <nav>
+          <a href="/" style="color:#d4a54a;margin-right:16px">Начало</a>
+          <a href="/products" style="color:#d4a54a;margin-right:16px">Продукти</a>
+          <a href="/promotions" style="color:#d4a54a;margin-right:16px">Промоции</a>
+          <a href="/contact" style="color:#d4a54a">Контакти</a>
+        </nav>
+      </div>
+    </noscript>
+
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>

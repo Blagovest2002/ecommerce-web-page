@@ -1,7 +1,4 @@
 @import "tailwindcss";
-@import "tw-animate-css";
-
-@custom-variant dark (&:is(.dark *));
 
 @theme inline {
   --color-background: hsl(var(--background));
@@ -40,6 +37,104 @@
   100% {
     transform: translateX(100%);
   }
+}
+
+@keyframes enterUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes enterLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes enterRight {
+  from {
+    opacity: 0;
+    transform: translateX(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes enterZoom {
+  from {
+    opacity: 0;
+    transform: scale(0.92);
+    filter: blur(8px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+    filter: blur(0);
+  }
+}
+
+@keyframes floatTilt {
+  0% {
+    transform: translateY(0) rotateZ(0deg);
+  }
+  35% {
+    transform: translateY(-16px) rotateZ(1.5deg);
+  }
+  70% {
+    transform: translateY(-6px) rotateZ(-0.8deg);
+  }
+  100% {
+    transform: translateY(0) rotateZ(0deg);
+  }
+}
+
+.motion-enter-up,
+.motion-enter-left,
+.motion-enter-right,
+.motion-enter-zoom {
+  animation-duration: 650ms;
+  animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+  animation-fill-mode: both;
+}
+
+.motion-enter-up {
+  animation-name: enterUp;
+}
+
+.motion-enter-left {
+  animation-name: enterLeft;
+}
+
+.motion-enter-right {
+  animation-name: enterRight;
+}
+
+.motion-enter-zoom {
+  animation-name: enterZoom;
+}
+
+.motion-delay-150 {
+  animation-delay: 150ms;
+}
+
+.motion-delay-200 {
+  animation-delay: 200ms;
+}
+
+.motion-float {
+  animation: floatTilt 6s ease-in-out infinite;
 }
 
 /* Texture overlay for Art Modern feel */

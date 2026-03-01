@@ -1,25 +1,24 @@
-import { motion } from "framer-motion";
-import { Link } from "wouter";
-import { SEO, localBusinessSchema } from "@/components/SEO";
-import heroImage from "@assets/IMG_7466_1772385908982.jpeg";
+import { Link } from "react-router-dom";
+import { SEO, localBusinessSchema, websiteSchema } from "@/components/SEO";
+
+const heroImage = {
+  avif: "/images/hero.avif",
+  webp: "/images/hero.webp",
+  fallback: "/images/hero.jpg",
+};
 
 export default function Home() {
   return (
     <>
       <SEO 
-        title="Райски Газ София 24/7 - Доставка до 20 минути" 
-        description="Най-ниски цени на райски газ и доставка в София! БЕЗПЛАТНА експресна доставка до 20 минути на флакони и балони. Поръчай по телефон 24/7."
-        canonicalUrl="https://raiskigazsofia.bg/"
-        schema={localBusinessSchema}
+        title="Райски Газ София 24/7 — Денонощна доставка на флакони и балони" 
+        description="Поръчайте райски газ с безплатна експресна доставка до 20 минути в София. Флакони Exotic Whip, Instant Whip и Carbon Whip на най-ниски цени. Обадете се 24/7: 088 640 1804."
+        path="/"
+        schema={[localBusinessSchema, websiteSchema]}
       />
       <main className="container mx-auto px-6 pt-40 md:pt-48 pb-20 min-h-[calc(100vh-200px)] flex flex-col justify-center relative z-10">
         <div className="flex flex-col lg:flex-row items-center justify-between gap-12 lg:gap-8">
-          <motion.div 
-            initial={{ opacity: 0, x: -30 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8, ease: "easeOut" }}
-            className="max-w-2xl mx-auto lg:mx-0 text-center lg:text-left flex-1"
-          >
+          <div className="max-w-2xl mx-auto lg:mx-0 text-center lg:text-left flex-1 motion-enter-left">
             <div className="inline-block px-4 py-2 rounded-full bg-primary/10 border border-primary/20 text-primary font-bold text-sm md:text-base mb-6">
               🚀 Най-бързата доставка в града
             </div>
@@ -45,14 +44,14 @@ export default function Home() {
             </div>
 
             <div className="mt-14 flex flex-col sm:flex-row gap-6 justify-center lg:justify-start">
-              <Link href="/products">
+              <Link to="/products">
                 <button 
                   className="px-10 py-5 bg-primary text-primary-foreground font-extrabold text-lg rounded-none border border-primary hover:bg-transparent hover:text-primary transition-colors shadow-[0_0_30px_rgba(217,160,91,0.3)] hover:shadow-[0_0_40px_rgba(217,160,91,0.5)] active:scale-95 duration-300 uppercase tracking-widest"
                 >
                   Разгледай Продуктите
                 </button>
               </Link>
-              <Link href="/promotions">
+              <Link to="/promotions">
                 <button 
                   className="px-10 py-5 bg-transparent border border-white/20 text-white font-bold text-lg rounded-none hover:bg-white/10 transition-colors hover:scale-105 active:scale-95 duration-200 uppercase tracking-widest"
                 >
@@ -60,35 +59,26 @@ export default function Home() {
                 </button>
               </Link>
             </div>
-          </motion.div>
+          </div>
 
-          <motion.div
-            initial={{ opacity: 0, scale: 0.8, filter: "blur(10px)" }}
-            animate={{ opacity: 1, scale: 1, filter: "blur(0px)" }}
-            transition={{ duration: 1.2, ease: "easeOut", delay: 0.2 }}
-            className="flex-1 w-full max-w-lg lg:max-w-xl relative"
-          >
-            <motion.div
-              animate={{ 
-                y: [0, -20, 0],
-                rotateZ: [0, 2, -1, 0]
-              }}
-              transition={{ 
-                duration: 6, 
-                repeat: Infinity, 
-                ease: "easeInOut" 
-              }}
-              className="relative z-10 perspective-1000"
-            >
+          <div className="flex-1 w-full max-w-lg lg:max-w-xl relative motion-enter-zoom motion-delay-200">
+            <div className="relative z-10 perspective-1000 motion-float">
               <div className="absolute inset-0 bg-gradient-to-tr from-primary/30 to-amber-500/30 blur-[80px] rounded-full scale-90" />
-              <img 
-                src={heroImage} 
-                alt="Exotic Whip райски газ" 
-                className="w-full h-auto object-cover rounded-[2rem] border border-white/10 shadow-[0_0_50px_rgba(0,0,0,0.5)] relative z-10"
-              />
+              <picture>
+                <source srcSet={heroImage.avif} type="image/avif" />
+                <source srcSet={heroImage.webp} type="image/webp" />
+                <img 
+                  src={heroImage.fallback} 
+                  alt="Exotic Whip райски газ флакон за доставка в София" 
+                  width={600}
+                  height={600}
+                  fetchPriority="high"
+                  className="w-full h-auto object-cover rounded-[2rem] border border-white/10 shadow-[0_0_50px_rgba(0,0,0,0.5)] relative z-10"
+                />
+              </picture>
               <div className="absolute inset-0 rounded-[2rem] border border-primary/20 pointer-events-none mix-blend-overlay" />
-            </motion.div>
-          </motion.div>
+            </div>
+          </div>
         </div>
         
         {/* SEO Content block - visible to crawlers, styled beautifully for users */}
@@ -101,6 +91,15 @@ export default function Home() {
             <p className="text-lg leading-relaxed">
               Разполагаме с разнообразие от размери, включително популярните Exotic Whip и Instant Whip. 
               Всички наши продукти са с гарантирано качество, а експресната ни доставка пристига до вашия адрес за по-малко от 20 минути.
+            </p>
+            <p className="text-lg leading-relaxed mt-4">
+              Разгледайте всички налични 
+              <Link to="/products" className="text-primary hover:underline"> продукти и флакони</Link>,
+              вижте актуалните 
+              <Link to="/promotions" className="text-primary hover:underline"> промоции</Link>
+              или се свържете директно през 
+              <Link to="/contact" className="text-primary hover:underline"> страницата за контакт</Link>
+              за най-бърза поръчка по телефон в София.
             </p>
           </div>
       </main>

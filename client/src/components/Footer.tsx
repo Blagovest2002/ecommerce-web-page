@@ -1,9 +1,21 @@
-import { Link } from "wouter";
+import { Link } from "react-router-dom";
 import { Phone, MapPin, Clock } from "lucide-react";
 
 export function Footer() {
   return (
-    <footer className="bg-background/95 border-t border-white/5 pt-16 pb-8 relative z-10 mt-auto">
+    <footer
+      className="bg-background/95 border-t border-white/5 pt-16 pb-8 relative z-10 mt-auto"
+      itemScope
+      itemType="https://schema.org/LocalBusiness"
+    >
+      <meta itemProp="name" content="Райски Газ София 24/7" />
+      <meta itemProp="telephone" content="+359886401804" />
+      <meta itemProp="url" content="https://raiskigazsofia.bg" />
+      <div itemProp="address" itemScope itemType="https://schema.org/PostalAddress">
+        <meta itemProp="addressLocality" content="София" />
+        <meta itemProp="addressCountry" content="BG" />
+      </div>
+
       <div className="container mx-auto px-6">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-12 mb-12">
           <div>
@@ -15,38 +27,30 @@ export function Footer() {
             </p>
           </div>
           
-          <div>
+          <nav aria-label="Бързи връзки">
             <h4 className="text-lg font-bold mb-4 text-white">Бързи връзки</h4>
             <ul className="space-y-3">
               <li>
-                <Link href="/">
-                  <span className="text-muted-foreground hover:text-primary transition-colors cursor-pointer text-sm">Начало</span>
-                </Link>
+                <Link to="/" className="text-muted-foreground hover:text-primary transition-colors text-sm">Начало</Link>
               </li>
               <li>
-                <Link href="/products">
-                  <span className="text-muted-foreground hover:text-primary transition-colors cursor-pointer text-sm">Продукти - Флакони и Балони</span>
-                </Link>
+                <Link to="/products" className="text-muted-foreground hover:text-primary transition-colors text-sm">Продукти – Флакони и Балони</Link>
               </li>
               <li>
-                <Link href="/promotions">
-                  <span className="text-muted-foreground hover:text-primary transition-colors cursor-pointer text-sm">Промоции и Пакети</span>
-                </Link>
+                <Link to="/promotions" className="text-muted-foreground hover:text-primary transition-colors text-sm">Промоции и Пакети</Link>
               </li>
               <li>
-                <Link href="/contact">
-                  <span className="text-muted-foreground hover:text-primary transition-colors cursor-pointer text-sm">Контакти</span>
-                </Link>
+                <Link to="/contact" className="text-muted-foreground hover:text-primary transition-colors text-sm">Контакти</Link>
               </li>
             </ul>
-          </div>
+          </nav>
           
           <div>
             <h4 className="text-lg font-bold mb-4 text-white">Контакти</h4>
             <ul className="space-y-4">
               <li className="flex items-start gap-3 text-muted-foreground text-sm">
                 <Phone className="w-5 h-5 text-primary shrink-0" />
-                <a href="tel:0886401804" className="hover:text-white transition-colors">088 640 1804 (Поръчка по телефон)</a>
+                <a href="tel:+359886401804" className="hover:text-white transition-colors">088 640 1804 (Поръчка по телефон)</a>
               </li>
               <li className="flex items-start gap-3 text-muted-foreground text-sm">
                 <MapPin className="w-5 h-5 text-primary shrink-0" />

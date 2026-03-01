@@ -1,46 +1,62 @@
-import { motion } from "framer-motion";
 import { Phone } from "lucide-react";
-import { SEO } from "@/components/SEO";
-
-import product1 from "@assets/IMG_7461_1772361053130.jpeg";
-import product2 from "@assets/IMG_7462_1772361053131.jpeg";
-import product3 from "@assets/IMG_7463_1772361053130.jpeg";
-import product4 from "@assets/IMG_7460_1772361053129.jpeg";
+import { Link } from "react-router-dom";
+import { SEO, buildProductSchema, localBusinessSchema } from "@/components/SEO";
 
 const promos = [
-  { id: 1, name: "Exotic Whip 670g", offer: "6 броя • 180,00 €", image: product1 },
-  { id: 2, name: "Exotic Whip 2000g", offer: "3 броя • 200,00 €", image: product2 },
-  { id: 3, name: "Instant Whip 640g", offer: "6 броя • 110,00 €", image: product3 },
-  { id: 4, name: "Carbon Whip Magnum 1100g", offer: "4 броя • 155,00 €", image: product4 },
+  {
+    id: 1,
+    name: "Exotic Whip 670g",
+    offer: "6 броя • 130,00 €",
+    image: { avif: "/images/promo-1.avif", webp: "/images/promo-1.webp", fallback: "/images/promo-1.jpg" },
+  },
+  {
+    id: 2,
+    name: "Exotic Whip 2000g",
+    offer: "3 броя • 200,00 €",
+    image: { avif: "/images/promo-2.avif", webp: "/images/promo-2.webp", fallback: "/images/promo-2.jpg" },
+  },
+  {
+    id: 3,
+    name: "Instant Whip 640g",
+    offer: "6 броя • 110,00 €",
+    image: { avif: "/images/promo-3.avif", webp: "/images/promo-3.webp", fallback: "/images/promo-3.jpg" },
+  },
+  {
+    id: 4,
+    name: "Carbon Whip Magnum 1100g",
+    offer: "4 броя • 155,00 €",
+    image: { avif: "/images/promo-4.avif", webp: "/images/promo-4.webp", fallback: "/images/promo-4.jpg" },
+  },
 ];
 
 export default function Promotions() {
-  const promoSchema = promos.map(promo => ({
+  const promoSchemas = promos.map((promo) =>
+    buildProductSchema({
+      name: `Промо Пакет: ${promo.name}`,
+      price: promo.offer.split("•")[1]?.trim() ?? "0",
+      image: promo.image.fallback,
+      description: `Ексклузивна промоция за райски газ ${promo.name}. Вземете ${promo.offer.split("•")[0]} с доставка в София.`,
+    })
+  );
+  const promotionsListSchema = {
     "@context": "https://schema.org",
-    "@type": "Product",
-    "name": `Промо Пакет: ${promo.name} - ${promo.offer}`,
-    "image": `https://raiskigazsofia.bg${promo.image}`,
-    "description": `Ексклузивна промоция за райски газ ${promo.name}. Вземете ${promo.offer.split('•')[0]} с доставка в София.`,
-    "offers": {
-      "@type": "Offer",
+    "@type": "ItemList",
+    "name": "Промоции Райски Газ София",
+    "itemListElement": promos.map((promo, index) => ({
+      "@type": "ListItem",
+      "position": index + 1,
       "url": "https://raiskigazsofia.bg/promotions",
-      "priceCurrency": "EUR",
-      "price": promo.offer.split('•')[1].trim().replace(',', '.').replace(' €', ''),
-      "availability": "https://schema.org/InStock",
-      "seller": {
-        "@type": "Organization",
-        "name": "Райски Газ София 24/7"
-      }
-    }
-  }));
+      "name": promo.name,
+    })),
+  };
 
   return (
     <>
       <SEO 
-        title="Промоции Райски Газ - Топ Оферти за София" 
-        description="Спестете с нашите ексклузивни пакетни предложения за райски газ. Поръчайте 6 броя Exotic Whip или Instant Whip на изгодна цена с безплатна доставка за София."
-        canonicalUrl="https://raiskigazsofia.bg/promotions"
-        schema={promoSchema}
+        title="Промоции Райски Газ — Топ Оферти за София" 
+        description="Спестете с нашите ексклузивни пакетни предложения за райски газ. Exotic Whip, Instant Whip и Carbon Whip на промо цени с безплатна доставка за София."
+        path="/promotions"
+        schema={[localBusinessSchema, promotionsListSchema, ...promoSchemas]}
       />
       <main className="container mx-auto px-6 pt-32 pb-20 min-h-screen relative z-10">
         <div className="mb-16 text-center max-w-3xl mx-auto">
@@ -54,12 +70,10 @@ export default function Promotions() {
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 md:gap-10">
           {promos.map((item, i) => (
-            <motion.div 
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: i * 0.1 }}
+            <div
               key={item.id}
-              className="flex flex-col items-center group relative"
+              className="flex flex-col items-center group relative motion-enter-up"
+              style={{ animationDelay: `${i * 90}ms` }}
             >
               <div className="absolute -top-4 -right-4 bg-primary text-white font-black px-4 py-2 rounded-full z-20 shadow-lg rotate-12 transform group-hover:rotate-0 transition-transform">
                 ПРОМО
@@ -67,11 +81,18 @@ export default function Promotions() {
               
               <div className="w-64 h-64 md:w-72 md:h-72 rounded-[2rem] overflow-hidden mb-6 relative border-2 border-primary/20 group-hover:border-primary transition-colors duration-500 shadow-[0_0_30px_rgba(217,70,239,0.15)] bg-gradient-to-b from-white/5 to-transparent">
                 <div className="absolute inset-0 bg-gradient-to-tr from-primary/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity z-10 mix-blend-overlay" />
-                <img 
-                  src={item.image} 
-                  alt={item.name} 
-                  className="w-full h-full object-contain p-4 group-hover:scale-110 transition-transform duration-700"
-                />
+                <picture>
+                  <source srcSet={item.image.avif} type="image/avif" />
+                  <source srcSet={item.image.webp} type="image/webp" />
+                  <img 
+                    src={item.image.fallback} 
+                    alt={`Промоция ${item.name} — райски газ София`} 
+                    loading="lazy"
+                    width={288}
+                    height={288}
+                    className="w-full h-full object-contain p-4 group-hover:scale-110 transition-transform duration-700"
+                  />
+                </picture>
               </div>
               
               <h2 className="text-2xl font-bold text-center mb-3 group-hover:text-primary transition-colors">
@@ -86,7 +107,7 @@ export default function Promotions() {
                   {item.offer.split('•')[1]}
                 </div>
               </div>
-            </motion.div>
+            </div>
           ))}
         </div>
         
@@ -97,11 +118,25 @@ export default function Promotions() {
             експресна 24/7 доставка за цяла <strong className="text-white">София</strong>. 
           </p>
           <a 
-            href="tel:0886401804" 
+            href="tel:+359886401804" 
             className="inline-flex items-center justify-center gap-3 px-8 py-4 font-bold text-white bg-white/10 border border-white/20 rounded-full hover:bg-white/20 active:scale-95 transition-all text-xl"
           >
             <Phone className="w-6 h-6" /> Свържете се с нас
           </a>
+
+          {/* Additional SEO copy */}
+          <p className="mt-8 text-base leading-relaxed">
+            Нашите промоционални пакети включват <strong className="text-white">флакони</strong> от Exotic Whip, Instant Whip и Carbon Whip Magnum на специални цени. 
+            Всяка <strong className="text-white">поръчка по телефон</strong> се доставя безплатно до 20 минути във всички квартали на <strong className="text-white">София</strong>. 
+            Използвайте пакетните оферти за максимална стойност при по-големи количества.
+          </p>
+          <p className="mt-4 text-base leading-relaxed">
+            Ако търсите единични артикули, вижте всички 
+            <Link to="/products" className="text-primary hover:underline"> продукти и цени</Link>
+            , или отидете на 
+            <Link to="/contact" className="text-primary hover:underline"> страницата за контакт</Link>
+            за бърза поръчка по телефон в София.
+          </p>
         </div>
       </main>
     </>
