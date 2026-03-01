@@ -1,5 +1,6 @@
 import { Link, useLocation } from "wouter";
-import { Phone, Package, Percent, Zap, MapPin } from "lucide-react";
+import { Phone, Package, Percent, MapPin } from "lucide-react";
+import logo from "@/assets/images/logo.png";
 
 export function Header() {
   const [location] = useLocation();
@@ -8,8 +9,11 @@ export function Header() {
     <header className="fixed top-0 left-0 right-0 z-40 bg-background/80 backdrop-blur-xl border-b border-white/5">
       <div className="container mx-auto px-4 md:px-6 h-auto py-4 md:py-0 md:h-24 flex flex-col md:flex-row items-center justify-between gap-4">
         <Link href="/">
-          <div className="font-black text-3xl tracking-tighter text-transparent bg-clip-text bg-gradient-to-r from-primary to-blue-400 flex items-center gap-2 cursor-pointer hover:opacity-80 transition-opacity">
-            <Zap className="w-8 h-8 text-primary" fill="currentColor" /> N2O СОФИЯ
+          <div className="flex items-center gap-3 cursor-pointer hover:opacity-80 transition-opacity">
+            <img src={logo} alt="Райски Газ София Logo" className="h-10 w-auto rounded-full border border-primary/30 shadow-[0_0_15px_rgba(217,70,239,0.2)]" />
+            <div className="font-black text-2xl tracking-tighter text-transparent bg-clip-text bg-gradient-to-r from-primary to-amber-500">
+              N2O СОФИЯ
+            </div>
           </div>
         </Link>
         
