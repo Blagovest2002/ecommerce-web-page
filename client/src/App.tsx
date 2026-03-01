@@ -3,25 +3,15 @@ import { queryClient } from "./lib/queryClient";
 import { QueryClientProvider } from "@tanstack/react-query";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
-import { Suspense, lazy } from "react";
-
-const Home = lazy(() => import("@/pages/Home"));
-const Products = lazy(() => import("@/pages/Products"));
-const Promotions = lazy(() => import("@/pages/Promotions"));
-const Contact = lazy(() => import("@/pages/Contact"));
-const NotFound = lazy(() => import("@/pages/not-found"));
+import NotFound from "@/pages/not-found";
+import Home from "@/pages/Home";
 
 function Router() {
   return (
-    <Suspense fallback={<div className="min-h-screen bg-background flex items-center justify-center text-primary">Зареждане...</div>}>
-      <Switch>
-        <Route path="/" component={Home}/>
-        <Route path="/products" component={Products}/>
-        <Route path="/promotions" component={Promotions}/>
-        <Route path="/contact" component={Contact}/>
-        <Route component={NotFound} />
-      </Switch>
-    </Suspense>
+    <Switch>
+      <Route path="/" component={Home}/>
+      <Route component={NotFound} />
+    </Switch>
   );
 }
 
