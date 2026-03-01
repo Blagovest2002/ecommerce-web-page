@@ -1,0 +1,65 @@
+You are an expert React + Vite + SEO engineer. Optimize this Vite+React Single Page Application for maximum Google SEO performance and local SEO for Sofia, Bulgaria, while keeping the design intact.
+
+Project context:
+- Vite + React (SPA), TypeScript if available
+- Pages/sections needed: Home, Products, Promotions, Contact
+- Navigation currently may be client-side only.
+- Site name: "Райски Газ София"
+- Phone: "0886401804"
+- Target location: Sofia, Bulgaria
+- Ordering is via phone only (no cart).
+
+IMPORTANT constraints (SPA reality):
+- You must implement the best-possible SEO for an SPA.
+- If the project can be deployed with a lightweight pre-render solution, implement it.
+  Prefer: react-snap OR Vite SSG with pre-rendering (generate static HTML for /, /products, /promotions, /contact).
+- If you cannot pre-render, implement SPA SEO mitigations: correct index.html meta defaults + dynamic head tags via react-helmet-async + sitemap/robots + good internal linking + LocalBusiness/Product schema.
+
+Goals:
+1) Technical SEO:
+   - Unique <title> and meta description per route.
+   - Canonical URL per route.
+   - OpenGraph + Twitter cards.
+   - robots.txt and sitemap.xml generated and served at /robots.txt and /sitemap.xml.
+   - Clean URLs (no hashes): use react-router-dom with BrowserRouter.
+   - 404 handling route.
+   - Correct language (bg) and viewport, theme-color.
+2) Local SEO:
+   - NAP consistency across all pages (Name, Address or service area Sofia, Phone).
+   - Add LocalBusiness schema JSON-LD sitewide (name, telephone, areaServed Sofia, url, sameAs if present).
+   - Contact page includes click-to-call tel: link, service area “София”, optional working hours.
+3) Product SEO:
+   - Products and promotions displayed as structured lists with descriptive headings.
+   - Add Product + Offer schema JSON-LD per item (name, image, priceCurrency EUR, price, availability, url).
+4) Performance / Core Web Vitals:
+   - Optimize images (WebP/AVIF), lazy-load below the fold, set explicit width/height to avoid CLS.
+   - Split code by route with React.lazy/Suspense.
+   - Reduce JS/CSS where possible (tree-shaking, avoid heavy libs).
+   - Preconnect to required domains and set proper caching headers suggestions for hosting.
+5) Content:
+   - Ensure each route has exactly one H1 and meaningful H2 sections.
+   - Add 150–300 words of unique Bulgarian copy per route with natural keywords:
+     “райски газ”, “флакони”, “София”, “поръчка по телефон”.
+   - No keyword stuffing; keep it readable.
+
+Implementation requirements:
+- Use react-router-dom with routes:
+  /, /products, /promotions, /contact
+- Add react-helmet-async for per-route head tags (title, description, canonical, OG/Twitter).
+- Add a SITE_URL constant from Vite env:
+  import.meta.env.VITE_SITE_URL with fallback to window.location.origin.
+- Create public/robots.txt and public/sitemap.xml (or generate at build time).
+- Add JSON-LD scripts with Helmet (script type="application/ld+json") or directly in components.
+- Add a footer with internal links + NAP (Name, Phone, Sofia).
+- Do NOT add tracking/analytics scripts unless requested.
+
+Pre-rendering (strongly preferred):
+- Implement pre-rendering so that /, /products, /promotions, /contact have static HTML outputs for crawlers.
+- If using react-snap:
+  - Add it as a dev dependency.
+  - Ensure routes are crawlable and links are <a> or <Link>.
+  - Configure postbuild script to run react-snap.
+- If using another Vite-compatible SSG/prerender tool, choose the simplest reliable option and document it.
+
+
+Start by scanning the codebase, identify current routing/head setup, then implement the improvements end-to-end.
