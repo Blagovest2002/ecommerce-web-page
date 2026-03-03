@@ -1,7 +1,19 @@
-import { Link } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { Phone, MapPin, Clock } from "lucide-react";
 
 export function Footer() {
+  const navigate = useNavigate();
+  const { pathname } = useLocation();
+
+  const handleFooterNavClick = (targetPath: string) => (e: React.MouseEvent) => {
+    e.preventDefault();
+    if (pathname === targetPath) {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    } else {
+      navigate(targetPath);
+    }
+  };
+
   return (
     <footer
       className="bg-background/95 border-t border-white/5 pt-16 pb-8 relative z-10 mt-auto"
@@ -31,16 +43,16 @@ export function Footer() {
             <h4 className="text-lg font-bold mb-4 text-white">Бързи връзки</h4>
             <ul className="space-y-3">
               <li>
-                <Link to="/" className="text-muted-foreground hover:text-primary transition-colors text-sm">Начало</Link>
+                <a href="/" onClick={handleFooterNavClick("/")} className="text-muted-foreground hover:text-primary transition-colors text-sm cursor-pointer">Начало</a>
               </li>
               <li>
-                <Link to="/products" className="text-muted-foreground hover:text-primary transition-colors text-sm">Продукти – Флакони и Балони</Link>
+                <a href="/products" onClick={handleFooterNavClick("/products")} className="text-muted-foreground hover:text-primary transition-colors text-sm cursor-pointer">Продукти – Флакони и Балони</a>
               </li>
               <li>
-                <Link to="/promotions" className="text-muted-foreground hover:text-primary transition-colors text-sm">Промоции и Пакети</Link>
+                <a href="/promotions" onClick={handleFooterNavClick("/promotions")} className="text-muted-foreground hover:text-primary transition-colors text-sm cursor-pointer">Промоции и Пакети</a>
               </li>
               <li>
-                <Link to="/contact" className="text-muted-foreground hover:text-primary transition-colors text-sm">Контакти</Link>
+                <a href="/contact" onClick={handleFooterNavClick("/contact")} className="text-muted-foreground hover:text-primary transition-colors text-sm cursor-pointer">Контакти</a>
               </li>
             </ul>
           </nav>

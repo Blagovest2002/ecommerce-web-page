@@ -6,13 +6,13 @@ const products = [
   {
     id: 1,
     name: "Exotic Whip 670g",
-    price: "75,00 €",
+    price: "30,00 €",
     image: { avif: "/images/product-1.avif", webp: "/images/product-1.webp", fallback: "/images/product-1.jpg" },
   },
   {
     id: 2,
     name: "Exotic Whip 2000g",
-    price: "30,00 €",
+    price: "70,00 €",
     image: { avif: "/images/product-2.avif", webp: "/images/product-2.webp", fallback: "/images/product-2.jpg" },
   },
   {
