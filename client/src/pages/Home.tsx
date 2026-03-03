@@ -38,8 +38,12 @@ export default function Home() {
                 БЕЗПЛАТНА експресна доставка до 20 минути в София
               </p>
               <p className="flex items-center justify-center lg:justify-start gap-4">
+                <span className="w-2 h-2 rounded-full bg-primary shadow-[0_0_10px_rgba(217,160,91,0.8)]" />
+                ПРОМОЦИОНАЛНИ оферти при покупа на повече от 1 флакон райски газ
+              </p>
+              <p className="flex items-center justify-center lg:justify-start gap-4">
                 <span className="w-2 h-2 rounded-full bg-amber-500 shadow-[0_0_10px_rgba(245,158,11,0.8)]" />
-                Най-ниски цени на райски газ и доставка в София!
+                НАЙ-НИСКИ цени на райски газ и доставка в София!
               </p>
             </div>
 
