@@ -2,7 +2,7 @@ import { Helmet } from "react-helmet-async";
 
 const SITE_NAME = "Райски Газ София 24/7";
 const configuredSiteUrl = (import.meta.env.VITE_SITE_URL as string | undefined)?.trim();
-const SITE_URL = (configuredSiteUrl || "https://raiskigazsofia.bg").replace(/\/$/, "");
+const SITE_URL = (configuredSiteUrl || "https://raiskigazsofia1.com").replace(/\/$/, "");
 const DEFAULT_OG_IMAGE = `${SITE_URL}/og-image.png`;
 
 interface SEOProps {
@@ -70,7 +70,7 @@ export const localBusinessSchema: Record<string, unknown> = {
   "@context": "https://schema.org",
   "@type": "LocalBusiness",
   "name": "Райски Газ София 24/7",
-  "url": "https://raiskigazsofia.bg",
+  "url": "https://raiskigazsofia1.com",
   "telephone": "+359886401804",
   "areaServed": {
     "@type": "City",
@@ -103,7 +103,7 @@ export const websiteSchema: Record<string, unknown> = {
   "@context": "https://schema.org",
   "@type": "WebSite",
   "name": "Райски Газ София 24/7",
-  "url": "https://raiskigazsofia.bg",
+  "url": "https://raiskigazsofia1.com",
   "inLanguage": "bg",
 };
 
@@ -123,7 +123,7 @@ export function buildProductSchema(product: {
     "name": product.name,
     "image": product.image.startsWith("http")
       ? product.image
-      : `https://raiskigazsofia.bg${product.image}`,
+      : `https://raiskigazsofia1.com${product.image}`,
     "description":
       product.description ||
       `Висококачествен райски газ ${product.name} с безплатна експресна доставка в София.`,
@@ -133,7 +133,7 @@ export function buildProductSchema(product: {
     },
     "offers": {
       "@type": "Offer",
-      "url": "https://raiskigazsofia.bg/products",
+      "url": "https://raiskigazsofia1.com/products",
       "priceCurrency": "EUR",
       "price": numericPrice,
       "availability": "https://schema.org/InStock",

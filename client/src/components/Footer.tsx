@@ -22,7 +22,7 @@ export function Footer() {
     >
       <meta itemProp="name" content="Райски Газ София 24/7" />
       <meta itemProp="telephone" content="+359886401804" />
-      <meta itemProp="url" content="https://raiskigazsofia.bg" />
+      <meta itemProp="url" content="https://raiskigazsofia1.com" />
       <div itemProp="address" itemScope itemType="https://schema.org/PostalAddress">
         <meta itemProp="addressLocality" content="София" />
         <meta itemProp="addressCountry" content="BG" />

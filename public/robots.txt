@@ -2,4 +2,4 @@ User-agent: *
 Allow: /
 Disallow: /api/
 
-Sitemap: https://raiskigazsofia.bg/sitemap.xml
+Sitemap: https://raiskigazsofia1.com/sitemap.xml

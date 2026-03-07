@@ -40,7 +40,7 @@ export default function Products() {
     "itemListElement": products.map((product, index) => ({
       "@type": "ListItem",
       "position": index + 1,
-      "url": "https://raiskigazsofia.bg/products",
+      "url": "https://raiskigazsofia1.com/products",
       "name": product.name,
     })),
   };

@@ -45,7 +45,7 @@ export default function Promotions() {
     "itemListElement": promos.map((promo, index) => ({
       "@type": "ListItem",
       "position": index + 1,
-      "url": "https://raiskigazsofia.bg/promotions",
+      "url": "https://raiskigazsofia1.com/promotions",
       "name": promo.name,
     })),
   };
