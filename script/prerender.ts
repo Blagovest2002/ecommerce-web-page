@@ -126,6 +126,9 @@ async function inlineCSS() {
       '$1display=optional'
     );
 
+    // Inject modulepreload hints for critical JS chunks to flatten the dependency chain
+    html = injectModulePreloads(html);
+
     fs.writeFileSync(htmlFile, html, "utf-8");
     console.log(`  ✅  Inlined CSS in ${path.relative(DIST, htmlFile)}`);
   }
@@ -144,6 +147,28 @@ function getAllHtmlFiles(dir: string): string[] {
     }
   }
   return results;
+}
+
+/**
+ * Inject <link rel="modulepreload"> for the entry-point JS chunk into the <head>.
+ * Vite already handles deeper chunks, but the entry file (index-*.js) is only
+ * discovered after HTML parsing. Preloading it flattens the critical chain.
+ */
+function injectModulePreloads(html: string): string {
+  const assetsDir = path.join(DIST, "assets");
+  if (!fs.existsSync(assetsDir)) return html;
+
+  const jsFiles = fs.readdirSync(assetsDir).filter((f: string) => f.endsWith(".js"));
+
+  // Only preload the entry-point chunk (index-*.js) — Vite handles the rest
+  const entryFile = jsFiles.find((f: string) => f.startsWith("index-"));
+  if (!entryFile) return html;
+
+  // Skip if already preloaded by Vite
+  if (html.includes(entryFile)) return html;
+
+  const preloadTag = `<link rel="modulepreload" href="/assets/${entryFile}">`;
+  return html.replace("</head>", `${preloadTag}\n</head>`);
 }
 
 prerender().catch((err) => {
