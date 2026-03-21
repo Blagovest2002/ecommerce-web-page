@@ -25,7 +25,10 @@ export function SEO({
   noindex = false,
 }: SEOProps) {
   const normalizedPath = path.startsWith("/") ? path : `/${path}`;
-  const canonicalUrl = `${SITE_URL}${normalizedPath}`;
+  // Append trailing slash for non-root paths to match Cloudflare Pages' redirect behaviour.
+  // Cloudflare redirects /products → /products/ (308), so canonical must match the final URL.
+  const trailingPath = normalizedPath === "/" ? "/" : normalizedPath.replace(/\/?$/, "/");
+  const canonicalUrl = `${SITE_URL}${trailingPath}`;
   const fullTitle = path === "/" ? title : `${title} | ${SITE_NAME}`;
 
   return (
