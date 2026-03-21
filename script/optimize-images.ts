@@ -66,12 +66,12 @@ async function optimizeOne(item: SourceItem) {
 
   // Generate smaller mobile variant for hero image
   if (item.outName === "hero") {
-    const smWidth = 400;
+    const smWidth = 320;
     await input.clone().resize({ width: smWidth, withoutEnlargement: true })
-      .avif({ quality: 50, effort: 4 })
+      .avif({ quality: 45, effort: 4 })
       .toFile(path.join(OUT_DIR, "hero-sm.avif"));
     await input.clone().resize({ width: smWidth, withoutEnlargement: true })
-      .webp({ quality: 75, effort: 4 })
+      .webp({ quality: 68, effort: 4 })
       .toFile(path.join(OUT_DIR, "hero-sm.webp"));
     console.log("  → generated hero-sm (mobile) variants");
   }

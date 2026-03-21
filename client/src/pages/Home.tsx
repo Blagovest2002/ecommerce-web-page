@@ -67,21 +67,21 @@ export default function Home() {
 
           <div className="flex-1 w-full max-w-lg lg:max-w-xl relative">
             <div className="relative z-10">
-              <div aria-hidden="true" className="absolute inset-0 bg-gradient-to-tr from-primary/30 to-amber-500/30 blur-[80px] rounded-full scale-90" />
+              <div aria-hidden="true" className="absolute inset-0 bg-gradient-to-tr from-primary/30 to-amber-500/30 blur-[48px] md:blur-[80px] rounded-full scale-90" />
               <picture>
+                <source media="(max-width: 640px)" srcSet={heroImage.webpSm} type="image/webp" />
                 <source media="(max-width: 640px)" srcSet={heroImage.avifSm} type="image/avif" />
                 <source srcSet={heroImage.avif} type="image/avif" />
-                <source media="(max-width: 640px)" srcSet={heroImage.webpSm} type="image/webp" />
                 <source srcSet={heroImage.webp} type="image/webp" />
                 <img 
                   src={heroImage.fallback} 
                   alt="Exotic Whip райски газ флакон за доставка в София" 
                   width={540}
                   height={640}
+                  loading="eager"
                   fetchPriority="high"
                   sizes="(max-width: 640px) calc(100vw - 48px), (max-width: 1024px) 50vw, 36rem"
-                  decoding="async"
-                  className="w-full h-auto object-cover rounded-[2rem] border border-white/10 shadow-[0_0_50px_rgba(0,0,0,0.5)] relative z-10"
+                  className="w-full h-auto object-cover rounded-[2rem] border border-white/10 shadow-[0_0_30px_rgba(0,0,0,0.5)] md:shadow-[0_0_50px_rgba(0,0,0,0.5)] relative z-10"
                 />
               </picture>
               <div className="absolute inset-0 rounded-[2rem] border border-primary/20 pointer-events-none mix-blend-overlay" />
