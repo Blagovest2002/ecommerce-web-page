@@ -75,44 +75,47 @@ async function prerender() {
 
   console.log("\n🎉  Pre-rendering complete!");
 
-  // Inline CSS to eliminate render-blocking stylesheet requests
-  await inlineCSS();
+  // Post-process HTML: add CSS preload hint, fix fonts, inject modulepreloads
+  await postProcessHTML();
 }
 
 /**
- * After pre-rendering, replace <link rel="stylesheet"> tags with inline <style>
- * to eliminate render-blocking CSS requests. The CSS is only ~8 KiB so inlining
- * is a net win for FCP/LCP.
+ * Post-process pre-rendered HTML files:
+ *  1. Add <link rel="preload" as="style"> for the CSS file so it downloads
+ *     in parallel with the HTML document (no render-blocking delay).
+ *     The CSS stays as a separate cacheable file — inlining 40 KB into every
+ *     HTML response bloats the document and hurts mobile FCP on slow networks.
+ *  2. Restore font stylesheet media=print (Puppeteer's onload handler changes it to all).
+ *  3. Preserve display=optional in font URLs.
+ *  4. Inject modulepreload hints for critical JS.
  */
-async function inlineCSS() {
-  console.log("\n📦  Inlining CSS into HTML files...");
+async function postProcessHTML() {
+  console.log("\n🔧  Post-processing HTML files...");
 
   const assetsDir = path.join(DIST, "assets");
   if (!fs.existsSync(assetsDir)) {
-    console.log("⚠️  No assets directory found, skipping CSS inlining");
+    console.log("⚠️  No assets directory found, skipping post-processing");
     return;
   }
 
   const cssFiles = fs.readdirSync(assetsDir).filter((f: string) => f.endsWith(".css"));
-  if (cssFiles.length === 0) {
-    console.log("⚠️  No CSS files found to inline");
-    return;
-  }
-
-  const cssContent = cssFiles
-    .map((f: string) => fs.readFileSync(path.join(assetsDir, f), "utf-8"))
-    .join("\n");
 
   const htmlFiles = getAllHtmlFiles(DIST);
 
   for (const htmlFile of htmlFiles) {
     let html = fs.readFileSync(htmlFile, "utf-8");
 
-    // Match <link> tags referencing /assets/*.css (handles any attribute order)
-    html = html.replace(
-      /<link[^>]*href=["']\/assets\/[^"']+\.css["'][^>]*\/?>/gi,
-      `<style>${cssContent}</style>`
-    );
+    // Add <link rel="preload" as="style"> for each CSS file so the browser
+    // fetches it immediately while still parsing the rest of the <head>.
+    // This eliminates extra round-trip latency without bloating the HTML.
+    for (const cssFile of cssFiles) {
+      const href = `/assets/${cssFile}`;
+      const preloadTag = `<link rel="preload" as="style" href="${href}">`;
+      // Only inject if not already present
+      if (!html.includes(preloadTag)) {
+        html = html.replace("<head>", `<head>\n    ${preloadTag}`);
+      }
+    }
 
     // Restore font stylesheet media=print (Puppeteer's onload handler changed it to media=all)
     html = html.replace(
@@ -130,10 +133,10 @@ async function inlineCSS() {
     html = injectModulePreloads(html);
 
     fs.writeFileSync(htmlFile, html, "utf-8");
-    console.log(`  ✅  Inlined CSS in ${path.relative(DIST, htmlFile)}`);
+    console.log(`  ✅  Post-processed ${path.relative(DIST, htmlFile)}`);
   }
 
-  console.log("📦  CSS inlining complete!");
+  console.log("🔧  Post-processing complete!");
 }
 
 function getAllHtmlFiles(dir: string): string[] {
