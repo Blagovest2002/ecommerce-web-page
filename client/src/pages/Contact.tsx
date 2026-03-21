@@ -10,7 +10,7 @@ export default function Contact() {
         path="/contact"
         schema={localBusinessSchema}
       />
-      <main id="main-content" className="container mx-auto px-6 pt-32 pb-20 min-h-screen relative z-10 flex flex-col justify-center">
+      <main id="main-content" className="container mx-auto px-6 pt-48 md:pt-32 pb-20 min-h-screen relative z-10 flex flex-col justify-center">
         <div className="max-w-4xl mx-auto w-full">
           <div className="text-center mb-16">
             <h1 className="text-5xl md:text-7xl font-black mb-6 text-transparent bg-clip-text bg-gradient-to-r from-primary to-blue-400">

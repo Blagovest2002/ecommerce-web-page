@@ -18,7 +18,7 @@ export default function Home() {
         path="/"
         schema={[localBusinessSchema, websiteSchema]}
       />
-      <main id="main-content" className="container mx-auto px-6 pt-40 md:pt-48 pb-20 min-h-[calc(100vh-200px)] flex flex-col justify-center relative z-10">
+      <main id="main-content" className="container mx-auto px-6 pt-52 md:pt-48 pb-20 min-h-[calc(100vh-200px)] flex flex-col justify-center relative z-10">
         <div className="flex flex-col lg:flex-row items-center justify-between gap-12 lg:gap-8">
           <div className="max-w-2xl mx-auto lg:mx-0 text-center lg:text-left flex-1 motion-enter-left">
             <div className="inline-block px-4 py-2 rounded-full bg-primary/10 border border-primary/20 text-primary font-bold text-sm md:text-base mb-6">
