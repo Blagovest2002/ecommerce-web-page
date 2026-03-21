@@ -48,7 +48,7 @@ export function Header() {
           
           <a 
             href="tel:+359886401804" 
-            className="group relative inline-flex items-center justify-center gap-2 px-5 py-2.5 md:px-8 md:py-4 font-bold text-white bg-primary rounded-full overflow-hidden transition-transform hover:scale-105 active:scale-95 shadow-[0_0_20px_rgba(217,70,239,0.4)] text-sm md:text-lg ml-2 min-h-[44px] min-w-[160px] md:min-w-[200px]"
+            className="group relative inline-flex items-center justify-center gap-2 px-5 py-2.5 md:px-8 md:py-4 font-bold text-primary-foreground bg-primary rounded-full overflow-hidden transition-transform hover:scale-105 active:scale-95 shadow-[0_0_20px_rgba(217,70,239,0.4)] text-sm md:text-lg ml-2 min-h-[44px] min-w-[160px] md:min-w-[200px]"
             data-testid="button-order"
             aria-label="Обадете се за поръчка: 088 640 1804"
           >
