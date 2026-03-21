@@ -78,7 +78,8 @@ export default defineConfig({
             normalizedId.endsWith("/client/src/App.tsx") ||
             normalizedId.endsWith("/client/src/components/Header.tsx") ||
             normalizedId.endsWith("/client/src/components/Footer.tsx") ||
-            normalizedId.endsWith("/client/src/components/SEO.tsx")
+            normalizedId.endsWith("/client/src/components/SEO.tsx") ||
+            normalizedId.endsWith("/client/src/pages/Home.tsx")
           ) {
             return "app-shell";
           }

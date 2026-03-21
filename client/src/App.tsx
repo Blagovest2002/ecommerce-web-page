@@ -2,9 +2,9 @@ import { lazy, Suspense, useEffect } from "react";
 import { Routes, Route, useLocation } from "react-router-dom";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
+import Home from "@/pages/Home";
 
-/* Code-split routes for smaller initial bundle */
-const Home = lazy(() => import("@/pages/Home"));
+/* Code-split secondary routes (Home is inlined to prevent hydration CLS) */
 const Products = lazy(() => import("@/pages/Products"));
 const Promotions = lazy(() => import("@/pages/Promotions"));
 const Contact = lazy(() => import("@/pages/Contact"));

@@ -120,6 +120,12 @@ async function inlineCSS() {
       '$1media="print"'
     );
 
+    // Ensure display=optional is preserved in font URLs (Puppeteer may have resolved differently)
+    html = html.replace(
+      /(fonts\.googleapis\.com\/css2[^"']*?)display=swap/gi,
+      '$1display=optional'
+    );
+
     fs.writeFileSync(htmlFile, html, "utf-8");
     console.log(`  ✅  Inlined CSS in ${path.relative(DIST, htmlFile)}`);
   }
