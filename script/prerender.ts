@@ -74,6 +74,70 @@ async function prerender() {
   }
 
   console.log("\n🎉  Pre-rendering complete!");
+
+  // Inline CSS to eliminate render-blocking stylesheet requests
+  await inlineCSS();
+}
+
+/**
+ * After pre-rendering, replace <link rel="stylesheet"> tags with inline <style>
+ * to eliminate render-blocking CSS requests. The CSS is only ~8 KiB so inlining
+ * is a net win for FCP/LCP.
+ */
+async function inlineCSS() {
+  console.log("\n📦  Inlining CSS into HTML files...");
+
+  const assetsDir = path.join(DIST, "assets");
+  if (!fs.existsSync(assetsDir)) {
+    console.log("⚠️  No assets directory found, skipping CSS inlining");
+    return;
+  }
+
+  const cssFiles = fs.readdirSync(assetsDir).filter((f: string) => f.endsWith(".css"));
+  if (cssFiles.length === 0) {
+    console.log("⚠️  No CSS files found to inline");
+    return;
+  }
+
+  const cssContent = cssFiles
+    .map((f: string) => fs.readFileSync(path.join(assetsDir, f), "utf-8"))
+    .join("\n");
+
+  const htmlFiles = getAllHtmlFiles(DIST);
+
+  for (const htmlFile of htmlFiles) {
+    let html = fs.readFileSync(htmlFile, "utf-8");
+
+    // Match <link> tags referencing /assets/*.css (handles any attribute order)
+    html = html.replace(
+      /<link[^>]*href=["']\/assets\/[^"']+\.css["'][^>]*\/?>/gi,
+      `<style>${cssContent}</style>`
+    );
+
+    // Restore font stylesheet media=print (Puppeteer's onload handler changed it to media=all)
+    html = html.replace(
+      /(<link[^>]*href=["']https:\/\/fonts\.googleapis\.com\/css2[^"']*["'][^>]*?)media=["']all["']/gi,
+      '$1media="print"'
+    );
+
+    fs.writeFileSync(htmlFile, html, "utf-8");
+    console.log(`  ✅  Inlined CSS in ${path.relative(DIST, htmlFile)}`);
+  }
+
+  console.log("📦  CSS inlining complete!");
+}
+
+function getAllHtmlFiles(dir: string): string[] {
+  const results: string[] = [];
+  for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
+    const fullPath = path.join(dir, entry.name);
+    if (entry.isDirectory() && entry.name !== "assets") {
+      results.push(...getAllHtmlFiles(fullPath));
+    } else if (entry.name.endsWith(".html")) {
+      results.push(fullPath);
+    }
+  }
+  return results;
 }
 
 prerender().catch((err) => {

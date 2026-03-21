@@ -63,6 +63,18 @@ async function optimizeOne(item: SourceItem) {
       .png({ compressionLevel: 9, adaptiveFiltering: true })
       .toFile(path.join(OUT_DIR, `${item.outName}.png`));
   }
+
+  // Generate smaller mobile variant for hero image
+  if (item.outName === "hero") {
+    const smWidth = 400;
+    await input.clone().resize({ width: smWidth, withoutEnlargement: true })
+      .avif({ quality: 50, effort: 4 })
+      .toFile(path.join(OUT_DIR, "hero-sm.avif"));
+    await input.clone().resize({ width: smWidth, withoutEnlargement: true })
+      .webp({ quality: 75, effort: 4 })
+      .toFile(path.join(OUT_DIR, "hero-sm.webp"));
+    console.log("  → generated hero-sm (mobile) variants");
+  }
 }
 
 async function run() {
