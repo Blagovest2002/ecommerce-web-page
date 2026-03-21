@@ -13,10 +13,16 @@ const app = (
   </HelmetProvider>
 );
 
-// If pre-rendered HTML exists, hydrate to avoid layout shift;
-// otherwise fall back to full client render.
+// If pre-rendered HTML exists, defer hydration until browser is idle
+// so React doesn't block first paint. The pre-rendered HTML is already
+// fully visible; hydration just adds interactivity.
 if (root.children.length > 0) {
-  hydrateRoot(root, app);
+  const hydrate = () => hydrateRoot(root, app);
+  if ("requestIdleCallback" in window) {
+    requestIdleCallback(hydrate);
+  } else {
+    setTimeout(hydrate, 50);
+  }
 } else {
   createRoot(root).render(app);
 }
