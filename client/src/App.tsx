@@ -77,8 +77,8 @@ function App() {
   return (
     <div className="min-h-screen bg-background text-foreground flex flex-col selection:bg-primary/30 bg-noise">
       <ScrollToTop />
-      <div className="fixed top-[-20%] left-[-10%] w-[50%] h-[50%] bg-primary/10 blur-[150px] rounded-full pointer-events-none z-0" />
-      <div className="fixed bottom-[-20%] right-[-10%] w-[50%] h-[50%] bg-amber-500/10 blur-[150px] rounded-full pointer-events-none z-0" />
+      <div aria-hidden="true" className="fixed top-[-20%] left-[-10%] w-[50%] h-[50%] bg-primary/10 blur-[150px] rounded-full pointer-events-none z-0" />
+      <div aria-hidden="true" className="fixed bottom-[-20%] right-[-10%] w-[50%] h-[50%] bg-amber-500/10 blur-[150px] rounded-full pointer-events-none z-0" />
       
       <Header />
       <AppRoutes />

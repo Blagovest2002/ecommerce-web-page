@@ -1,5 +1,24 @@
 @import "tailwindcss";
 
+/* Font fallback with size-adjust to prevent CLS during font swap */
+@font-face {
+  font-family: "Montserrat Fallback";
+  src: local("Arial"), local("Helvetica Neue"), local("Helvetica"), local("sans-serif");
+  size-adjust: 113.5%;
+  ascent-override: 89%;
+  descent-override: 23%;
+  line-gap-override: 0%;
+}
+
+@font-face {
+  font-family: "Cormorant Fallback";
+  src: local("Georgia"), local("Times New Roman"), local("serif");
+  size-adjust: 119%;
+  ascent-override: 95%;
+  descent-override: 27%;
+  line-gap-override: 0%;
+}
+
 @theme inline {
   --color-background: hsl(var(--background));
   --color-foreground: hsl(var(--foreground));
@@ -7,8 +26,8 @@
   --color-primary-foreground: hsl(var(--primary-foreground));
   --color-muted: hsl(var(--muted));
   --color-muted-foreground: hsl(var(--muted-foreground));
-  --font-sans: "Montserrat", sans-serif;
-  --font-serif: "Cormorant Garamond", serif;
+  --font-sans: "Montserrat", "Montserrat Fallback", sans-serif;
+  --font-serif: "Cormorant Garamond", "Cormorant Fallback", serif;
 }
 
 :root {

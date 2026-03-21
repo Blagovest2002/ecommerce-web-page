@@ -16,7 +16,7 @@ export default function Home() {
         path="/"
         schema={[localBusinessSchema, websiteSchema]}
       />
-      <main className="container mx-auto px-6 pt-40 md:pt-48 pb-20 min-h-[calc(100vh-200px)] flex flex-col justify-center relative z-10">
+      <main id="main-content" className="container mx-auto px-6 pt-40 md:pt-48 pb-20 min-h-[calc(100vh-200px)] flex flex-col justify-center relative z-10">
         <div className="flex flex-col lg:flex-row items-center justify-between gap-12 lg:gap-8">
           <div className="max-w-2xl mx-auto lg:mx-0 text-center lg:text-left flex-1 motion-enter-left">
             <div className="inline-block px-4 py-2 rounded-full bg-primary/10 border border-primary/20 text-primary font-bold text-sm md:text-base mb-6">
@@ -34,49 +34,49 @@ export default function Home() {
             <div className="space-y-6 text-xl md:text-2xl font-medium text-white/80 md:border-l-2 border-primary/50 md:pl-8 py-2 mx-auto md:mx-0 max-w-3xl">
               <h2 className="sr-only">Бърза и безплатна доставка на райски газ в София</h2>
               <p className="flex items-center justify-center lg:justify-start gap-4">
-                <span className="w-2 h-2 rounded-full bg-primary shadow-[0_0_10px_rgba(217,160,91,0.8)]" />
+                <span aria-hidden="true" className="w-2 h-2 rounded-full bg-primary shadow-[0_0_10px_rgba(217,160,91,0.8)]" />
                 БЕЗПЛАТНА експресна доставка до 20 минути в София
               </p>
               <p className="flex items-center justify-center lg:justify-start gap-4">
-                <span className="w-2 h-2 rounded-full bg-primary shadow-[0_0_10px_rgba(217,160,91,0.8)]" />
+                <span aria-hidden="true" className="w-2 h-2 rounded-full bg-primary shadow-[0_0_10px_rgba(217,160,91,0.8)]" />
                 ПРОМОЦИОНАЛНИ оферти при покупка на повече от 1 флакон райски газ
               </p>
               <p className="flex items-center justify-center lg:justify-start gap-4">
-                <span className="w-2 h-2 rounded-full bg-amber-500 shadow-[0_0_10px_rgba(245,158,11,0.8)]" />
+                <span aria-hidden="true" className="w-2 h-2 rounded-full bg-amber-500 shadow-[0_0_10px_rgba(245,158,11,0.8)]" />
                 НАЙ-НИСКИ цени на райски газ и доставка в София!
               </p>
             </div>
 
             <div className="mt-14 flex flex-col sm:flex-row gap-6 justify-center lg:justify-start">
-              <Link to="/products">
-                <button 
-                  className="px-10 py-5 bg-primary text-primary-foreground font-extrabold text-lg rounded-none border border-primary hover:bg-transparent hover:text-primary transition-colors shadow-[0_0_30px_rgba(217,160,91,0.3)] hover:shadow-[0_0_40px_rgba(217,160,91,0.5)] active:scale-95 duration-300 uppercase tracking-widest"
-                >
-                  Разгледай Продуктите
-                </button>
+              <Link 
+                to="/products"
+                className="px-10 py-5 bg-primary text-primary-foreground font-extrabold text-lg rounded-none border border-primary hover:bg-transparent hover:text-primary transition-colors shadow-[0_0_30px_rgba(217,160,91,0.3)] hover:shadow-[0_0_40px_rgba(217,160,91,0.5)] active:scale-95 duration-300 uppercase tracking-widest text-center inline-block"
+              >
+                Разгледай Продуктите
               </Link>
-              <Link to="/promotions">
-                <button 
-                  className="px-10 py-5 bg-transparent border border-white/20 text-white font-bold text-lg rounded-none hover:bg-white/10 transition-colors hover:scale-105 active:scale-95 duration-200 uppercase tracking-widest"
-                >
-                  Виж Промоциите
-                </button>
+              <Link 
+                to="/promotions"
+                className="px-10 py-5 bg-transparent border border-white/20 text-white font-bold text-lg rounded-none hover:bg-white/10 transition-colors hover:scale-105 active:scale-95 duration-200 uppercase tracking-widest text-center inline-block"
+              >
+                Виж Промоциите
               </Link>
             </div>
           </div>
 
-          <div className="flex-1 w-full max-w-lg lg:max-w-xl relative motion-enter-zoom motion-delay-200">
-            <div className="relative z-10 perspective-1000 motion-float">
-              <div className="absolute inset-0 bg-gradient-to-tr from-primary/30 to-amber-500/30 blur-[80px] rounded-full scale-90" />
+          <div className="flex-1 w-full max-w-lg lg:max-w-xl relative">
+            <div className="relative z-10">
+              <div aria-hidden="true" className="absolute inset-0 bg-gradient-to-tr from-primary/30 to-amber-500/30 blur-[80px] rounded-full scale-90" />
               <picture>
-                <source srcSet={heroImage.avif} type="image/avif" />
-                <source srcSet={heroImage.webp} type="image/webp" />
+                <source srcSet={heroImage.avif} type="image/avif" sizes="(max-width: 1024px) 100vw, 36rem" />
+                <source srcSet={heroImage.webp} type="image/webp" sizes="(max-width: 1024px) 100vw, 36rem" />
                 <img 
                   src={heroImage.fallback} 
                   alt="Exotic Whip райски газ флакон за доставка в София" 
-                  width={600}
-                  height={600}
+                  width={540}
+                  height={640}
                   fetchPriority="high"
+                  sizes="(max-width: 1024px) 100vw, 36rem"
+                  decoding="async"
                   className="w-full h-auto object-cover rounded-[2rem] border border-white/10 shadow-[0_0_50px_rgba(0,0,0,0.5)] relative z-10"
                 />
               </picture>
@@ -100,10 +100,21 @@ export default function Home() {
               Разгледайте всички налични 
               <Link to="/products" className="text-primary hover:underline"> продукти и флакони</Link>,
               вижте актуалните 
-              <Link to="/promotions" className="text-primary hover:underline"> промоции</Link>
+              <Link to="/promotions" className="text-primary hover:underline"> промоции </Link>
               или се свържете директно през 
               <Link to="/contact" className="text-primary hover:underline"> страницата за контакт</Link>
               за най-бърза поръчка по телефон в София.
+            </p>
+            <p className="text-lg leading-relaxed mt-4">
+              Партньори:{" "}
+              <a
+                href="https://www.raiskisofia.com/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-primary hover:underline"
+              >
+                https://www.raiskisofia.com/
+              </a>
             </p>
           </div>
       </main>

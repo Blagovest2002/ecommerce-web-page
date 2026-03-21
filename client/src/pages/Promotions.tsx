@@ -58,7 +58,7 @@ export default function Promotions() {
         path="/promotions"
         schema={[localBusinessSchema, promotionsListSchema, ...promoSchemas]}
       />
-      <main className="container mx-auto px-6 pt-32 pb-20 min-h-screen relative z-10">
+      <main id="main-content" className="container mx-auto px-6 pt-32 pb-20 min-h-screen relative z-10">
         <div className="mb-16 text-center max-w-3xl mx-auto">
           <h1 className="text-4xl md:text-6xl font-black mb-6 text-transparent bg-clip-text bg-gradient-to-r from-primary to-blue-400">
             Топ Промоции

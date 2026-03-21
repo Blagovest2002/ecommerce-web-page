@@ -16,7 +16,7 @@ export function Footer() {
 
   return (
     <footer
-      className="bg-background/95 border-t border-white/5 pt-16 pb-8 relative z-10 mt-auto"
+      className="bg-background/95 border-t border-white/5 pt-16 pb-8 relative z-10 mt-auto min-h-[320px]"
       itemScope
       itemType="https://schema.org/LocalBusiness"
     >
@@ -77,7 +77,7 @@ export function Footer() {
         </div>
         
         <div className="pt-8 border-t border-white/5 text-center flex flex-col md:flex-row justify-between items-center gap-4">
-          <p className="text-white/40 text-xs">
+          <p className="text-white/60 text-xs">
             © {new Date().getFullYear()} Райски Газ София 24/7. Всички права запазени.
           </p>
         </div>

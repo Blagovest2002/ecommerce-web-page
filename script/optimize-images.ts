@@ -35,24 +35,31 @@ async function ensureOutDir() {
 async function optimizeOne(item: SourceItem) {
   const input = sharp(item.src).rotate();
 
-  await input
-    .clone()
+  // Resize hero image to match actual display dimensions (max ~640px wide on mobile 2x)
+  const pipeline = item.outName === "hero"
+    ? input.clone().resize({ width: 640, withoutEnlargement: true })
+    : input.clone();
+  const pipeline2 = item.outName === "hero"
+    ? input.clone().resize({ width: 640, withoutEnlargement: true })
+    : input.clone();
+  const pipeline3 = item.outName === "hero"
+    ? input.clone().resize({ width: 640, withoutEnlargement: true })
+    : input.clone();
+
+  await pipeline
     .avif({ quality: 50, effort: 4 })
     .toFile(path.join(OUT_DIR, `${item.outName}.avif`));
 
-  await input
-    .clone()
+  await pipeline2
     .webp({ quality: 75, effort: 4 })
     .toFile(path.join(OUT_DIR, `${item.outName}.webp`));
 
   if (item.fallbackExt === "jpg") {
-    await input
-      .clone()
+    await pipeline3
       .jpeg({ quality: 82, mozjpeg: true })
       .toFile(path.join(OUT_DIR, `${item.outName}.jpg`));
   } else {
-    await input
-      .clone()
+    await pipeline3
       .png({ compressionLevel: 9, adaptiveFiltering: true })
       .toFile(path.join(OUT_DIR, `${item.outName}.png`));
   }
