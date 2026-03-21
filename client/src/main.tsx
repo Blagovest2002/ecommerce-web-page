@@ -1,4 +1,4 @@
-import { hydrateRoot, createRoot } from "react-dom/client";
+import { createRoot } from "react-dom/client";
 import { BrowserRouter } from "react-router-dom";
 import { HelmetProvider } from "react-helmet-async";
 import App from "./App";
@@ -13,16 +13,11 @@ const app = (
   </HelmetProvider>
 );
 
-// If pre-rendered HTML exists, defer hydration until browser is idle
-// so React doesn't block first paint. The pre-rendered HTML is already
-// fully visible; hydration just adds interactivity.
-if (root.children.length > 0) {
-  const hydrate = () => hydrateRoot(root, app);
-  if ("requestIdleCallback" in window) {
-    requestIdleCallback(hydrate);
-  } else {
-    setTimeout(hydrate, 50);
-  }
+// Pre-rendered HTML is already visible to the user.
+// Defer React bootstrap to idle time so it doesn't compete with first paint.
+const bootstrap = () => createRoot(root).render(app);
+if ("requestIdleCallback" in window) {
+  requestIdleCallback(bootstrap);
 } else {
-  createRoot(root).render(app);
+  setTimeout(bootstrap, 50);
 }
